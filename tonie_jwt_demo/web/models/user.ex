@@ -2,7 +2,7 @@ defmodule TonieJwtDemo.User do
   use TonieJwtDemo.Web, :model
 
   schema "users" do
-    field :tonie_id, :string
+    field :tonie_id, :string, virtual: true
     field :name, :string
 
     timestamps()
