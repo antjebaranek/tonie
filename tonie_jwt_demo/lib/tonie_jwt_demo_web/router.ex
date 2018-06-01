@@ -19,8 +19,20 @@ defmodule TonieJwtDemoWeb.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", TonieJwtDemoWeb do
-  #   pipe_through :api
-  # end
+  pipeline :api do
+    plug :accepts, ["json"]
+    plug Guardian.Plug.VerifyHeader
+    plug Guardian.Plug.LoadResource
+  end
+
+  pipeline :authenticated do
+    plug Guardian.Plug.EnsureAuthenticated
+  end
+
+  scope "/api/v1", TonieJwtDemo do
+    pipe_through :api
+
+    pipe_through :authenticated # restrict unauthenticated access for routes below
+    resources "/users", UserController, except: [:new, :edit]
+  end
 end
