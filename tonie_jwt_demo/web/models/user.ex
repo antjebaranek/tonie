@@ -26,8 +26,8 @@ defmodule TonieJwtDemo.User do
 
 #  defp generate_password_hash(changeset) do
 #    case changeset do
-#      %Ecto.Changeset{valid?: true, changes: %{password: password}} ->
-#        put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(password))
+#      %Ecto.Changeset{valid?: true, changes: %{tonie_id: tonie_id}} ->
+#        put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(tonie_id))
 #      _ ->
 #        changeset
 #    end
